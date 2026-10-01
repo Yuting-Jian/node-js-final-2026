@@ -1,5 +1,7 @@
-const { router } = require('express')
+const express = require('express')
 const SkillController = require('../controllers/skill')
+
+const router = express.Router();
 
 router.get('/coaches/skill',SkillController.getSkills)
 

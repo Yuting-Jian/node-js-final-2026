@@ -10,7 +10,7 @@ const isNotString = (value)=>{
 }
 
 const isNotNumber = (value)=>{
-    return typeof value !== 'number' || value < 0 || isNaN(value)
+    return typeof value !== 'number' || value < 0 || isNaN(value) || !Number.isInteger(value)
 }
 
 class CreditPackageController {
@@ -29,13 +29,13 @@ class CreditPackageController {
     static async postCreditPackages(req, res, next){
         const repo = dataSource.getRepository(CreditPackageEntity)
         try{
-            const { name, creditAmount, price } = req.body
+            const { name, credit_amount, price } = req.body
 
             if( 
                 isEmpty(name) || 
                 isNotString(name) || 
-                isEmpty(creditAmount) || 
-                isNotNumber(creditAmount) || 
+                isEmpty(credit_amount) || 
+                isNotNumber(credit_amount) || 
                 isEmpty(price) || 
                 isNotNumber(price)
             ){
@@ -50,9 +50,9 @@ class CreditPackageController {
                 return res.status(400).json({ status: 'failed', message: '方案名稱已存在'})
             }
 
-            const skill = await repo.save({ name })
+            const creditPackage = await repo.save({ name, credit_amount, price })
             
-            return res.status(200).json({ status: 'success', data: skill})
+            return res.status(200).json({ status: 'success', data: creditPackage})
         }catch(err){
             next(err)
         }
@@ -61,7 +61,7 @@ class CreditPackageController {
     static async deleteCreditPackage(req, res, next){
         const repo = dataSource.getRepository(CreditPackageEntity)
         try{
-            const { id } = req.query
+            const { id } = req.params
 
             if (!id) {
                 return res.status(400).json({ status: 'failed', message: '缺少要移除的ID' })

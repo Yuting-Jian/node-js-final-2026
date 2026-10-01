@@ -15,7 +15,7 @@ class SkillController {
         const repo = dataSource.getRepository(SkillEntity)
         try{
             const skills = await repo.find({
-                select: ['id', 'name'] // 依規格建議選取欄位
+                select: { id: true, name: true } // 依規格建議選取欄位
             })
             
             return res.status(200).json({ status: 'success', data: skills})
@@ -52,7 +52,7 @@ class SkillController {
     static async deleteSkill(req, res, next){
         const repo = dataSource.getRepository(SkillEntity)
         try{
-            const { id } = req.query
+            const { id } = req.params
 
             if (!id) {
                 return res.status(400).json({ status: 'failed', message: '缺少要移除的ID' })
