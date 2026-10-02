@@ -1,14 +1,6 @@
 const dataSource = require('../db/dataSource')
 const SkillEntity = require('../entities/skill')
-
-const isEmpty = (value)=>{
-    return value === undefined || value === null
-}
-
-const isNotString = (value)=>{
-    return typeof value !== 'string' || value.trim().length === 0
-}
-
+const { isEmpty, isNotString } = require('../utils/validate')
 class SkillController {
 
     static async getSkills(req, res, next){

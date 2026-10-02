@@ -5,6 +5,7 @@ dotenv.config()
 
 const SkillEntity = require('../entities/skill')
 const CreditPackageEntity = require('../entities/creditPackage')
+const UserEntity = require('../entities/user')
 
 const dataSource = new DataSource({
     type: 'postgres',
@@ -19,7 +20,8 @@ const dataSource = new DataSource({
 
     entities: [
         SkillEntity,
-        CreditPackageEntity
+        CreditPackageEntity,
+        UserEntity
     ],
     migrations: ['db/migrations/*.js'],
 })

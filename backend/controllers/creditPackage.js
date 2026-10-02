@@ -1,18 +1,6 @@
 const dataSource = require('../db/dataSource')
 const CreditPackageEntity = require('../entities/creditPackage')
-
-const isEmpty = (value)=>{
-    return value === undefined || value === null
-}
-
-const isNotString = (value)=>{
-    return typeof value !== 'string' || value.trim().length === 0
-}
-
-const isNotNumber = (value)=>{
-    return typeof value !== 'number' || value < 0 || isNaN(value) || !Number.isInteger(value)
-}
-
+const { isEmpty, isNotString, isNotNumber } = require('../utils/validate')
 class CreditPackageController {
 
     static async getCreditPackages(req, res, next){

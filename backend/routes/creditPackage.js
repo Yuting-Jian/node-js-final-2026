@@ -1,12 +1,12 @@
 const express = require('express')
-const CreditPackage = require('../controllers/creditPackage')
+const CreditPackageController = require('../controllers/creditPackage')
 
 const router = express.Router();
 
-router.get('/credit-package',CreditPackage.getCreditPackages)
+router.get('/credit-package',CreditPackageController.getCreditPackages)
 
-router.post('/credit-package',CreditPackage.postCreditPackages)
+router.post('/credit-package',CreditPackageController.postCreditPackages)
 
-router.delete('/credit-package/:id',CreditPackage.deleteCreditPackage)
+router.delete('/credit-package/:id',CreditPackageController.deleteCreditPackage)
 
 module.exports = router
